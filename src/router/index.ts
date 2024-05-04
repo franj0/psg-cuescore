@@ -12,17 +12,17 @@ const router = createRouter({
     {
       path: '/participants',
       name: 'participants',
-      component: () => import('@/views/Participants.vue')
+      component: () => import('@/views/ParticipantsView.vue')
     },
     {
       path: '/matches',
       name: 'matches',
-      component: () => import('@/views/Matches.vue')
+      component: () => import('@/views/MatchesView.vue')
     },
     {
       path: '/matches/:id',
       name: 'match-details',
-      component: () => import('@/views/MatchDetails.vue')
+      component: () => import('@/views/MatchDetailsView.vue')
     },
   ]
 })
