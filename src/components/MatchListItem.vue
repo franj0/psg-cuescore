@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { computed, defineProps } from 'vue'
 import type { Match } from '@/types';
+import { MATCH_STATUS } from '@/utility/constants'
 
-defineProps({
+const props = defineProps({
   match: {
     type: Object as () => Match,
     required: true
   }
 })
 
+const matchStatus = computed(() => {
+  const status = props.match?.matchstatus.toUpperCase();
+  return status ? MATCH_STATUS[status as keyof typeof MATCH_STATUS] : undefined;
+});
+
 </script>
 <template>
-  <div class="match">
+  <div class="match" :class="matchStatus">
     <div class="player-a">
       {{match.playerA.name}}
     </div>
@@ -43,5 +49,17 @@ defineProps({
       flex: 0.2;
       text-align: center;
     }
+
+  }
+  .finished {
+    color: darkred;
+  }
+
+  .waiting {
+    color: gray;
+  }
+
+  .playing {
+    color: green;
   }
 </style>
