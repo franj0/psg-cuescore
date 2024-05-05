@@ -1,34 +1,18 @@
 <script setup lang="ts">
-import { type Ref, ref } from 'vue'
+import { type Ref, toRefs } from 'vue'
 import type { MatchFilter } from '@/types';
 
 const emit = defineEmits(['filtersChanged']);
-const filters = ref<MatchFilter[]>([{
-  name: 'Waiting',
-  value: 'waiting',
-  checked: false,
-}, {
-  name: 'Playing',
-  value: 'playing',
-  checked: false,
-}, {
-  name: 'Finished',
-  value: 'finished',
-  checked: false,
-}]);
+const props = defineProps<{
+  filters: Ref<MatchFilter[]>
+}>();
 
-const activeFilters: Ref<string[]> = ref([]);
+// Destructure  the props
+const { filters } = toRefs(props);
 
 const onClick = (matchFilter: MatchFilter) => {
   matchFilter.checked = !matchFilter.checked
-
-  if (matchFilter.checked) {
-    activeFilters.value.push(matchFilter.value)
-  } else {
-    activeFilters.value = activeFilters.value
-      .filter((filter) => filter !== matchFilter.value);
-  }
-  emit('filtersChanged', activeFilters.value);
+  emit('filtersChanged', matchFilter);
 }
 </script>
 <template>
