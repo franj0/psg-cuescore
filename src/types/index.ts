@@ -8,7 +8,8 @@ export type Match = {
   scoreA: number
   scoreB: number
   matchstatus: string
-  visible: boolean
+  visible?: boolean
+  roundName: string
 }
 
 export type Owner = {

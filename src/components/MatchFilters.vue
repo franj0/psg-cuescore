@@ -21,10 +21,12 @@ const activeFilters: Ref<string[]> = ref([]);
 
 const onClick = (matchFilter: MatchFilter) => {
   matchFilter.checked = !matchFilter.checked
+
   if (matchFilter.checked) {
     activeFilters.value.push(matchFilter.value)
   } else {
-    activeFilters.value = activeFilters.value.filter((filter) => filter !== matchFilter.value);
+    activeFilters.value = activeFilters.value
+      .filter((filter) => filter !== matchFilter.value);
   }
   emit('filtersChanged', activeFilters.value);
 }
